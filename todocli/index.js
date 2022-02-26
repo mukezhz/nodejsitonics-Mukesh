@@ -3,83 +3,93 @@ import { hideBin } from 'yargs/helpers'
 import { addTask, showTask, getTask, removeTask, updateTask } from './utils/index.mjs'
 
 // definition of add command
-yargs(hideBin(process.argv)).command({
-    command: 'add',
-    description: 'This command will add todo item',
-    handler: (argv) => {
-        addTask(argv)
-    },
-    builder: {
-        todo: {
-            describe: 'The name of the todo item',
-            type: "string",
-            demandOption: true,
-        },
-        status: {
-            describe: 'The status of the todo',
-            type: "boolean",
-            demandOption: false,
-        },
-    }
-}).parse()
+const yargv = yargs(hideBin(process.argv))
 
-yargs(hideBin(process.argv)).command({
-    command: 'list',
-    description: 'This command will show todo items',
-    handler: (argv) => {
-        showTask(argv)
-    },
-}).parse()
+yargv
+    .command({
+        command: 'add --todo="<todo-item>"',
+        alias: 'add',
+        description: 'This command will add todo item',
+        handler: (argv) => {
+            addTask(argv)
+        },
+        builder: {
+            todo: {
+                describe: 'The name of the todo item',
+                type: "string",
+                demandOption: true,
+            },
+            status: {
+                describe: 'The status of the todo',
+                type: "boolean",
+                demandOption: false,
+            },
+        }
+    })
 
-yargs(hideBin(process.argv)).command({
-    command: 'get',
-    description: 'This command will show todo items',
-    handler: (argv) => {
-        getTask(argv)
-    },
-    builder: {
-        id: {
-            describe: 'The id of the todo item',
-            type: "string",
-            demandOption: true,
+    .command({
+        command: 'list',
+        alias: 'list',
+        description: 'This command will show todo items',
+        handler: (argv) => {
+            showTask(argv)
         },
-    }
-}).parse()
+    })
 
-yargs(hideBin(process.argv)).command({
-    command: 'remove',
-    description: 'This command will remove todo item',
-    handler: (argv) => {
-        removeTask(argv)
-    },
-    builder: {
-        id: {
-            describe: 'The id of the todo item',
-            type: "string",
-            demandOption: true,
+    .command({
+        command: 'get --id="<todo-id>"',
+        alias: 'get',
+        description: 'This command will show todo items',
+        handler: (argv) => {
+            getTask(argv)
         },
-    }
-}).parse()
+        builder: {
+            id: {
+                describe: 'The id of the todo item',
+                type: "string",
+                demandOption: true,
+            },
+        }
+    })
 
-yargs(hideBin(process.argv)).command({
-    command: 'update',
-    description: 'This command will update status todo item',
-    handler: (argv) => {
-        updateTask(argv)
-    },
-    builder: {
-        id: {
-            describe: 'The id of the todo item',
-            type: "string",
-            demandOption: false,
+    .command({
+        command: 'remove --id="<todo-id>"',
+        alias: 'remove',
+        description: 'This command will remove todo item',
+        handler: (argv) => {
+            removeTask(argv)
         },
-        status: {
-            describe: 'The status of the todo item',
-            type: "boolean",
-            demandOption: false,
+        builder: {
+            id: {
+                describe: 'The id of the todo item',
+                type: "string",
+                demandOption: true,
+            },
+        }
+    })
+
+    .command({
+        command: 'update --id="<todo-id>" --todo="<todo-item>" --status="<bool>"',
+        alias: 'update',
+        description: 'This command will update status todo item',
+        handler: (argv) => {
+            updateTask(argv)
         },
-    }
-}).parse()
+        builder: {
+            id: {
+                describe: 'The id of the todo item',
+                type: "string",
+                demandOption: false,
+            },
+            status: {
+                describe: 'The status of the todo item',
+                type: "boolean",
+                demandOption: false,
+            },
+        }
+    }).demandCommand()
+    .help('h').alias('h', 'help')
+    .argv
 
 
 
