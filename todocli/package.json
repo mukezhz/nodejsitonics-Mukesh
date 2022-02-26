@@ -1,0 +1,28 @@
+{
+  "name": "todocli",
+  "version": "1.0.0",
+  "description": "Todo app using cli",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mukezhz/nodejsitonics-Mukesh.git"
+  },
+  "keywords": [
+    "cli",
+    "todo"
+  ],
+  "author": "Mukesh Kumar Chaudhary",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mukezhz/nodejsitonics-Mukesh/issues"
+  },
+  "homepage": "https://github.com/mukezhz/nodejsitonics-Mukesh#readme",
+  "dependencies": {
+    "uuid": "^8.3.2",
+    "yargs": "^17.3.1"
+  }
+}
