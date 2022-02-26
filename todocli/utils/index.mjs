@@ -28,7 +28,7 @@ export const addTask = (params) => {
 
 export const showTask = _ => {
     const data = readFile(FILENAME);
-    console.table(data, {})
+    console.table(data)
 }
 
 export const getTask = params => {
