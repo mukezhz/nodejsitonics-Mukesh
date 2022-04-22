@@ -1,13 +1,12 @@
 <script>
     import { onMount, getContext } from "svelte";
     import { Link } from "svelte-routing";
+    import { clientURL, apiUrl } from "../const";
 
     export let key;
     let data = null;
-    const clientURL = "http://localhost:8080";
 
     onMount(async (e) => {
-        const apiUrl = "http://localhost:5000";
         const response = await fetch(`${apiUrl}/api/${key}`, {
             method: "GET",
             headers: {
@@ -27,10 +26,10 @@
             <p>No data</p>
             <Link to="/">Shortener</Link>
         {:else}
-            <p>The original URL:</p>
+            <h1>The original URL:</h1>
             <a href={data.originalURL} taget="_blank">{data.originalURL}</a>
             <p>
-                <Link to="/">Go back</Link>
+                <Link to="/">Go Home</Link>
             </p>
         {/if}
     </p>

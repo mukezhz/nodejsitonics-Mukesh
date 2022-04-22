@@ -1,11 +1,10 @@
 <script>
     import { Link } from "svelte-routing";
+    import { clientURL, apiUrl } from "../const";
     let data = null;
-    const clientURL = "http://localhost:8080";
 
     const shortenURL = async (e) => {
         e.preventDefault();
-        const apiUrl = "http://localhost:5000";
         const newform = new FormData(e.target);
         const url = newform.get("url");
         const response = await fetch(`${apiUrl}/api/shorten`, {
@@ -27,7 +26,7 @@
 
 <form on:submit={shortenURL}>
     <div>
-        <label for="url">Original URL: </label>
+        <label for="url"><h1>Original URL:</h1></label>
         <input type="text" name="url" id="url" size="30" required />
     </div>
     <input type="submit" value="Enter" />
@@ -42,7 +41,7 @@
             {data.message}
         </p>
     {:else}
-        Your shorten URL is:
+        <h1>Your shorten URL is:</h1>
         <Link to={`${data.shorten}`}>{`${clientURL}/${data.shorten}`}</Link>
     {/if}
 </div>
