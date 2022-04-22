@@ -6,6 +6,8 @@ import * as cors from "cors"
 import { AppDataSource } from "./data-source"
 import { router } from "./routes"
 
+const PORT = process.env["PORT"] || 3000
+
 const { combine, timestamp, prettyPrint } = winston.format
 export const logger = winston.createLogger({
     level: 'info',
@@ -44,6 +46,6 @@ AppDataSource.initialize().then(async () => {
 }).catch(error => console.log(error))
 
 
-app.listen(5000, () => {
-    console.log("Listenin in port 5000!!!");
+app.listen(Number(PORT), () => {
+    console.log(`Listenin in port ${PORT}!!!`);
 })
