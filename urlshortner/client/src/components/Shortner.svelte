@@ -19,9 +19,6 @@
         const json = await response.json();
         data = json;
     };
-    // data = JSON.parse(data);
-    // if (!!data)
-    // const { shorten = "", message = "" } = data;
 </script>
 
 <form on:submit={shortenURL}>

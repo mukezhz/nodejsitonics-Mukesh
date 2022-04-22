@@ -2,7 +2,7 @@ import * as dotenv from "dotenv"
 dotenv.config()
 import * as express from "express"
 import * as winston from "winston"
-import * as cors from "cors"
+import * as cors from 'cors'
 import { AppDataSource } from "./data-source"
 import { router } from "./routes"
 
@@ -35,10 +35,9 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true, limit: "100mb" }))
 // adding prefix to tthe url
 app.use("/api", router)
+
 // using cors
-app.use(cors({
-    origin: true
-}))
+app.use(cors())
 
 AppDataSource.initialize().then(async () => {
     console.log("Connected to database...")
