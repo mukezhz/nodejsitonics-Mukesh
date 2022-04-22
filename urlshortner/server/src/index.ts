@@ -2,7 +2,6 @@ import * as dotenv from "dotenv"
 dotenv.config()
 import * as express from "express"
 import * as winston from "winston"
-import * as cors from 'cors'
 import { AppDataSource } from "./data-source"
 import { router } from "./routes"
 
@@ -29,15 +28,18 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const app = express()
+app.all('*', function(req, res, next) {
+       res.header("Access-Control-Allow-Origin", "*");
+       res.header("Access-Control-Allow-Headers", "X-Requested-With");
+       res.header('Access-Control-Allow-Headers', 'Content-Type');
+       next();
+});
 // for body to be automatically parse as json
 app.use(express.json())
 // config urlencode like rate limit
 app.use(express.urlencoded({ extended: true, limit: "100mb" }))
 // adding prefix to tthe url
 app.use("/api", router)
-
-// using cors
-app.use(cors())
 
 AppDataSource.initialize().then(async () => {
     console.log("Connected to database...")

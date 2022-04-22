@@ -6,10 +6,15 @@
       ],
       "target": "es6",
       "module": "commonjs",
-      "moduleResolution": "node",
+      "moduleResolution": "Node",
       "outDir": "./build",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
-      "sourceMap": true
+      "sourceMap": true,
+      "allowSyntheticDefaultImports": false,
+      "forceConsistentCasingInFileNames": true
+   },
+   "ts-node": {
+      "esm": true
    }
 }
